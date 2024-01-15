@@ -1,0 +1,5 @@
+#ignore everything here
+.gitignore
+# but not the wrap files and the .gitignore
+!*.wrap
+!*.gitignore
