@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.27)
 project(LibraryCatalogue)
 
-#set(PYBIND11_FINDPYTHON ON) должно было помочь, не помогает
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -21,8 +20,16 @@ include_directories(${CURSES_INCLUDE_DIR})
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/SQLiteCpp-3.3.1)
 
-add_executable(LibraryCatalogue main.cpp)
+add_executable(LibraryCatalogue src/main.cpp
+        src/App.cpp
+        include/App.h
+        src/UI.cpp
+        include/UI.h)
 
+target_include_directories(LibraryCatalogue
+        PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include/>)
 
 target_link_libraries(LibraryCatalogue
         SQLiteCpp
@@ -33,7 +40,7 @@ target_link_libraries(LibraryCatalogue
 )
 
 
-add_executable(my_test my_test.cpp)
+add_executable(my_test test/my_test.cpp)
 
 target_link_libraries(my_test
         GTest::gtest_main

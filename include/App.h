@@ -1,0 +1,10 @@
+#ifndef LIBRARYCATALOGUE_APP_H
+#define LIBRARYCATALOGUE_APP_H
+
+
+class App {
+
+};
+
+
+#endif //LIBRARYCATALOGUE_APP_H
