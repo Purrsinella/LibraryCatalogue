@@ -9,9 +9,9 @@ class UI {
 public:
     void menu();
 private:
-    WINDOW * shape();
-    int options(std::vector<std::string> &vec, WINDOW *menu_win);
-    void cleanScreen(WINDOW *menu_win);
+    WINDOW * shape(int height);
+    int options(std::vector<std::string> &vec, WINDOW *menuWin);
+    void cleanWin(WINDOW *menuWin);
 };
 
 
