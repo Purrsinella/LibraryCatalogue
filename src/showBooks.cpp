@@ -30,7 +30,7 @@ void showBooks::handleInput(int key) {
         case KEY_ENTER:
         case '\n':
             if(highlight == 0)
-                _engine->TransitionTo(new mainMenu);
+                _engine->TransitionTo(std::make_unique<mainMenu>());
             break;
         default:
             break;

@@ -2,30 +2,25 @@
 #include "ConcreteStateExit.h"
 
 
-Engine::Engine(State *state, Window window, Window bigWnd) : _state(state), _window(window), _textWindow(bigWnd), _nextState(nullptr) {
+Engine::Engine(std::unique_ptr<State> state, Window window, Window bigWnd) : _state(std::move(state)), _window(window), _textWindow(bigWnd), _nextState(nullptr) {
     _state->setEngine(this, _window, _textWindow);
 }
 
-Engine::~Engine() {
-    delete _state;
-    delete _nextState;
-}
+Engine::~Engine() = default;
 
-void Engine::TransitionTo(State *state) {
-    _nextState = state;
+void Engine::TransitionTo(std::unique_ptr<State> state) {
+    _nextState = std::move(state);
 }
 
 bool Engine::processTransition() {
     if (_nextState == nullptr)
         return true;
 
-    delete _state;
-
-    _state = _nextState;
+    _state = std::move(_nextState);
     _nextState = nullptr;
     _state->setEngine(this, _window, _textWindow);
 
-    if(dynamic_cast<ConcreteStateExit*>(_state) != nullptr){
+    if(dynamic_cast<ConcreteStateExit*>(_state.get()) != nullptr){
         return false;
     }
     return true;

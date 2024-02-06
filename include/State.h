@@ -1,18 +1,24 @@
 #ifndef STATE_MACHINE_STATE_H
 #define STATE_MACHINE_STATE_H
 #include "Window.h"
+//#include <SQLiteCpp/Database.h>
+
+#include <utility>
+#include <memory>
 
 class Engine;
 
 class State {
 protected:
-    Engine *_engine;
+    Engine* _engine;
     Window _window;
     Window _textWindow;
+//    std::shared_ptr<SQLite::Database>    db;
+
 public:
     virtual ~State() = default;
 
-    void setEngine(Engine *engine, Window window, Window bigWnd) {
+    void setEngine(Engine* engine, Window window, Window bigWnd) {
         _engine = engine;
         _window = window;
         _textWindow = bigWnd;

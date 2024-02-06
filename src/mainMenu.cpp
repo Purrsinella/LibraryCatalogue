@@ -32,9 +32,9 @@ void mainMenu::handleInput(int key) {
         case KEY_ENTER:
         case '\n':
             if(highlight == 0)
-                _engine->TransitionTo(new showBooks);
+                _engine->TransitionTo(std::make_unique<showBooks>());
             else if(highlight == 1)
-                _engine->TransitionTo(new ConcreteStateExit);
+                _engine->TransitionTo(std::make_unique<ConcreteStateExit>());
             break;
         default:
             break;
