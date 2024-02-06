@@ -20,11 +20,19 @@ include_directories(${CURSES_INCLUDE_DIR})
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/SQLiteCpp-3.3.1)
 
-add_executable(LibraryCatalogue src/main.cpp
-        src/App.cpp
-        include/App.h
-        src/UI.cpp
-        include/UI.h)
+add_executable(LibraryCatalogue
+        src/main.cpp
+        src/Engine.cpp
+        src/mainMenu.cpp
+        src/showBooks.cpp
+        src/Window.cpp
+        include/Engine.h
+        include/mainMenu.h
+        include/showBooks.h
+        include/State.h
+        include/Window.h
+        include/ConcreteStateExit.h
+)
 
 target_include_directories(LibraryCatalogue
         PUBLIC

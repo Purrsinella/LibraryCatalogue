@@ -1,15 +1,32 @@
-#include <iostream>
 #include "SQLiteCpp/Database.h"
 #include <string>
 #include <ncurses.h>
-#include <UI.h>
+#include <Window.h>
+#include <Engine.h>
+#include <mainMenu.h>
+
 
 int main() {
     initscr();
+
+    bool isRunning = true;
+
+    auto bigWindow = Window{};
+
+    auto window = Window(6,bigWindow.height);
     refresh();
-    UI ui;
-    ui.menu();
-    getch();
+    curs_set(0);
+    wrefresh(window.win);
+
+    Engine fsm(new mainMenu, window, bigWindow);
+
+    keypad(window.win, true);
+    while (isRunning) {
+        fsm.display();
+        auto key = wgetch(window.win);
+        fsm.handleInput(key);
+        isRunning = fsm.processTransition();
+    }
+
     endwin();
-    return 0;
 }
